@@ -291,6 +291,90 @@ class QualityRanker:
         }
         
         return report
+    
+    def calculate_quality_score(self, pin: Dict, embedding: Optional[np.ndarray] = None) -> QualityScore:
+        """Calculate simplified quality score for Pinterest pin data"""
+        pin_id = pin.get('pin_id', 'unknown')
+        
+        # Resolution score based on width/height
+        width = pin.get('width', 400)
+        height = pin.get('height', 600)
+        total_pixels = width * height
+        
+        min_pixels = 400 * 600
+        max_pixels = 1200 * 1600
+        
+        if total_pixels <= min_pixels:
+            resolution_score = 0.2
+        elif total_pixels >= max_pixels:
+            resolution_score = 1.0
+        else:
+            resolution_score = (total_pixels - min_pixels) / (max_pixels - min_pixels)
+        
+        # Clarity score based on aspect ratio
+        if width == 0 or height == 0:
+            clarity_score = 0.0
+        else:
+            aspect_ratio = width / height
+            ideal_ratios = [2/3, 3/4, 4/5]  # Pinterest preferred ratios
+            ratio_scores = [1.0 - abs(aspect_ratio - ideal) for ideal in ideal_ratios]
+            clarity_score = max(0.0, min(1.0, max(ratio_scores)))
+        
+        # Engagement score based on likes, saves, comments
+        likes = pin.get('likes', 0)
+        saves = pin.get('saves', 0)
+        comments = pin.get('comments', 0)
+        
+        weighted_engagement = (saves * 2.0) + (likes * 1.0) + (comments * 0.5)
+        
+        if weighted_engagement <= 0:
+            engagement_score = 0.0
+        else:
+            engagement_score = min(1.0, np.log10(weighted_engagement + 1) / 5.0)
+        
+        # Credibility score based on source and user
+        has_source = bool(pin.get('source_url', pin.get('link', '')))
+        user_id = pin.get('user_id', '')
+        
+        base_score = 0.5
+        
+        if has_source:
+            base_score += 0.25
+        
+        if user_id:
+            # Simulate user reputation (in real system, would use actual data)
+            try:
+                user_num = int(user_id.split('_')[-1]) if '_' in user_id else hash(user_id) % 100
+                if user_num < 50:  # Simulate "established" users
+                    base_score += 0.25
+            except:
+                pass
+        
+        credibility_score = min(1.0, base_score)
+        
+        # Calculate weighted total score
+        weights = {
+            'resolution': 0.25,
+            'clarity': 0.25,
+            'engagement': 0.30,
+            'credibility': 0.20
+        }
+        
+        total_score = (
+            resolution_score * weights['resolution'] +
+            clarity_score * weights['clarity'] +
+            engagement_score * weights['engagement'] +
+            credibility_score * weights['credibility']
+        )
+        
+        return QualityScore(
+            pin_id=pin_id,
+            total_score=total_score,
+            resolution_score=resolution_score,
+            clarity_score=clarity_score,
+            engagement_score=engagement_score,
+            credibility_score=credibility_score
+        )
 
 def main():
     """Demo usage of quality ranker"""
