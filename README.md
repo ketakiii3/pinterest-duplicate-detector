@@ -5,7 +5,6 @@ A complete AI-powered system for detecting duplicate content and ranking quality
 ![Pinterest Duplicate Detector](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.25+-red)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## 🎯 **What This System Does**
 
@@ -61,7 +60,7 @@ pinterest-duplicate-detector/
 
 1. **Clone and setup:**
    ```bash
-   git clone <your-repo>
+   git clone https://github.com/ketakiii3/pinterest-duplicate-detector.git
    cd pinterest-duplicate-detector
    pip install streamlit plotly pandas numpy
    ```
@@ -427,7 +426,7 @@ python demo_cli.py
 ### **🛠️ Development Setup:**
 ```bash
 # Clone repository
-git clone <repo-url>
+git clone https://github.com/ketakiii3/pinterest-duplicate-detector.git
 cd pinterest-duplicate-detector
 
 # Install development dependencies
@@ -448,47 +447,6 @@ streamlit run streamlit_app_cloud.py
 - **Documentation**: Tutorials, examples, and best practices
 
 ---
-
-## 📄 **License & Credits**
-
-### **📜 License:**
-MIT License - free for personal and commercial use
-
-### **🙏 Acknowledgments:**
-- **OpenAI CLIP**: Visual embedding models
-- **Facebook FAISS**: Similarity search library
-- **Streamlit**: Web application framework
-- **Plotly**: Interactive visualization library
-- **Python ecosystem**: NumPy, Pandas, scikit-learn
-
-### **🏆 Built With:**
-- **Python 3.11+**: Core programming language
-- **Streamlit**: Modern web framework for data apps
-- **Machine Learning**: CLIP, FAISS, scikit-learn
-- **Data Science**: NumPy, Pandas, Plotly
-- **Cloud Ready**: Optimized for modern deployment platforms
-
----
-
-## 📞 **Support & Contact**
-
-### **🐛 Issues & Bug Reports:**
-- GitHub Issues for technical problems
-- Detailed reproduction steps appreciated
-- Include system info and error messages
-
-### **💡 Feature Requests:**
-- Use GitHub Discussions for new ideas
-- Describe use case and expected behavior
-- Consider contributing implementation
-
-### **📚 Documentation:**
-- README files in each directory
-- Inline code documentation
-- Example notebooks and tutorials
-
----
-
 ## 🎉 **Summary**
 
 This Pinterest Duplicate Detector represents a complete, production-ready system for content analysis and duplicate detection. It combines modern AI/ML techniques with practical engineering solutions to solve real-world problems in content management platforms.
