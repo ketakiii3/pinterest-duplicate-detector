@@ -246,7 +246,7 @@ def main():
     st.sidebar.subheader("📊 Data Management")
     if st.sidebar.button("🔄 Generate Sample Data"):
         pins_data = generate_sample_data()
-        st.experimental_rerun()
+        st.rerun()
     
     if pins_data:
         st.sidebar.success(f"✅ {len(pins_data)} pins loaded")
