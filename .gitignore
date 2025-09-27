@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+venv/
+ENV/
+.venv
+
+# Data
+data/*.npy
+data/*.json
+data/*.csv
+!data/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Models
+*.pth
+*.pt
+
+# Logs
+*.log
+
+# Environment
+.env
